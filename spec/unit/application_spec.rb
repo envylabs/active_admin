@@ -43,12 +43,23 @@ describe ActiveAdmin::Application do
     application.allow_comments_in.should == [:admin]
   end
 
-  it "should have no default current_user_method" do
-    application.current_user_method.should == false
-  end
+  describe "authentication settings" do
 
-  it "should have no default authentication method" do
-    application.authentication_method.should == false
+    it "should have no default current_user_method" do
+      application.current_user_method.should == false
+    end
+
+    it "should have no default authentication method" do
+      application.authentication_method.should == false
+    end
+
+    it "should have a logout link path" do
+      application.logout_link_path.should == :destroy_admin_user_session_path
+    end
+
+    it "should have a logout link method" do
+      application.logout_link_method.should == :delete
+    end
   end
 
   describe "files in load path" do

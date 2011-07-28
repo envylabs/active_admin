@@ -98,6 +98,19 @@ Feature: Commenting
     Then I should see a table header with "Body"
     And I should see "Hello from Comment"
 
+  Scenario: Commenting on a STI subclass
+    Given a configuration of:
+    """
+      ActiveAdmin.register User
+    """
+    Given I am logged in
+    And a publisher named "Pragmatic Publishers" exists
+    When I am on the index page for users
+    And I follow "View"
+    When I add a comment "Hello World"
+    Then I should see a flash with "Comment was successfully created"
+    And I should be in the resource section for users
+
   Scenario: Creating a comment in one namespace is viewable in another that has configured as such
     Given a show configuration of:
     """
